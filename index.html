@@ -134,6 +134,14 @@
     margin-bottom: 6px;
   }
 
+  .optional {
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--rw-mid);
+    font-style: italic;
+    margin-left: 2px;
+  }
+
   .req { color: var(--rw-gold); font-size: 15px; line-height: 1; }
 
   .field input,
@@ -313,7 +321,7 @@
 
     <div class="field" id="f-reason">
       <label>Reason to Consider New Opportunities <span class="req">*</span></label>
-      <textarea id="reason" placeholder="e.g. Looking for a leadership role / a role with more strategic ownership / limited growth at current organization / at risk or affected by layoff / better salary etc. "></textarea>
+      <textarea id="reason" placeholder="e.g. Looking for a leadership role / a role with more strategic ownership / limited growth at current organization / at risk or affected by layoff / better salary etc."></textarea>
       <div class="error-msg">⚠ Please share your reason — this really helps us.</div>
     </div>
 
@@ -340,6 +348,11 @@
       <label>Benefits <span class="req">*</span></label>
       <input id="benefits" placeholder="e.g. Medical and Visa (Family or Self), Schooling Allowance, Airfare, Wellness Allowance, Corporate Discounts etc.">
       <div class="error-msg">⚠ Required.</div>
+    </div>
+
+    <div class="field" id="f-extra">
+      <label>Anything else to add? <span class="optional">(optional)</span></label>
+      <textarea id="extra" placeholder="e.g. Preferred industry, specific companies to avoid, upcoming travel, anything else you'd like your recruiter to know…"></textarea>
     </div>
 
     <hr class="divider">
@@ -385,6 +398,7 @@
   });
 
   function getSummary() {
+    const extra = val("extra");
     return `Candidate Details – Robert Walters
 
 Name: ${val("name")}
@@ -399,8 +413,7 @@ ${val("reason")}
 Notice Period: ${val("notice")}
 Current Salary: ${val("currentSalary")}
 Expected Salary: ${val("expectedSalary")}
-Benefits: ${val("benefits")}
-Anything else to add: ${val("anythingElseToAdd")}`;
+Benefits: ${val("benefits")}${extra ? `\n\nAnything else: ${extra}` : ""}`;
   }
 
   function validate() {
